@@ -34,7 +34,6 @@ def fun_LBP(image):
 
 def fun_HOG(image):
     # HOG
-
     # 调整图像对比度
     image = exposure.rescale_intensity(image, in_range=(10, 90))
 
