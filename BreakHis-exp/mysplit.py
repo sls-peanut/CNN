@@ -1,3 +1,5 @@
+import os
+
 import datasets
 import pandas as pd
 
@@ -26,19 +28,21 @@ dump_myfold_csv()函数:
                               'grp': 'train',
                               'tumor_class': img.info['tumor_class'],
                               'tumor_type': img.info['tumor_type'],
-                              'path': img.path.removeprefix('../data/BreaKHis_v1/')})
+                              'path': os.path.relpath(img.path, '../data/BreaKHis_v1/')})
+            # 'path': img.path[len('D:\\AI\\deep Learning\\CNN\\data\\BreaKHis_v1\\'):]}) 使用绝对路径，可以在win运行
+            # 'path': img.path.removeprefix('./data/BreaKHis_v1/')}) py3.9中的方法，去除前缀。作出以上两条修改适应3.8(以上2个任选其一)
         for img in dev_dataset_bin[magnification].img_list:
             data_list.append({'mag_grp': int(magnification),
                               'grp': 'dev',
                               'tumor_class': img.info['tumor_class'],
                               'tumor_type': img.info['tumor_type'],
-                              'path': img.path.removeprefix('../data/BreaKHis_v1/')})
+                              'path': os.path.relpath(img.path, '../data/BreaKHis_v1/')})
         for img in test_dataset_bin[magnification].img_list:
             data_list.append({'mag_grp': int(magnification),
                               'grp': 'test',
                               'tumor_class': img.info['tumor_class'],
                               'tumor_type': img.info['tumor_type'],
-                              'path': img.path.removeprefix('../data/BreaKHis_v1/')})
+                              'path': os.path.relpath(img.path, '../data/BreaKHis_v1/')})
 
     df = pd.DataFrame(data_list)
     df.to_csv(MY_FOLD_CSV, index=False)
@@ -76,10 +80,11 @@ statistic_myfold()函数:
     table.loc['total'] = table.sum(axis=0)
 
     # 对列重新排序,4种良心肿瘤和4种恶性肿瘤
-    table = table[['A(腺病)', 'F(纤维腺瘤)', 'PT(叶状肿瘤)', 'TA(管状腺酮)', 'B()', 'DC()', 'LC()', 'MC()', 'PC()', 'M()', 'total()']]
+    # A(腺病) F(纤维腺瘤) PT(叶状肿瘤) TA(管状腺酮) B(良性合计) DC(癌瘤) LC(小叶癌) MC(粘液癌) PC(乳头状癌) M(恶行合计) total(共计)
+    table = table[['A', 'F', 'PT', 'TA', 'B', 'DC', 'LC', 'MC', 'PC', 'M', 'total']]
 
     # dump the table to a new CSV file
-    table.to_csv('tumor_table.csv')
+    table.to_csv('tumor_table1.csv')
 
 
 if __name__ == '__main__':

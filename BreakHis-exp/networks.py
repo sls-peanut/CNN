@@ -6,9 +6,12 @@ class ResNet50(nn.Module):
     def __init__(self, num_classes):
         super(ResNet50, self).__init__()
         self.num_classes = num_classes
-        
-        self.resnet = models.resnet50(weights=models.ResNet50_Weights.DEFAULT)
-        
+
+        # 推荐的加载预训练 ResNet50 模型的方法
+        # model = models.resnet50(pretrained=True)
+        # self.resnet = models.resnet50(weights=models.ResNet50_Weights.DEFAULT)
+        self.resnet = models.resnet50(pretrained=True)
+
         num_features = self.resnet.fc.in_features
         self.resnet.fc = nn.Linear(num_features, num_classes)
         

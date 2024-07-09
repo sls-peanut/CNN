@@ -11,8 +11,10 @@ from train_eval import do_train, do_eval
 from datasets import num_classes_dict
 from networks import network_dict
 
-dataset_root = './dataset/BreaKHis_v1/'
-fold_csv_path = './dataset/BreaKHis_v1/Folds.csv'
+dataset_root = '../data/'
+# dataset_root = './dataset/BreaKHis_v1/'
+fold_csv_path = './dataset/BreaKHis_v1/mysplit.csv'
+# fold_csv_path = './dataset/BreaKHis_v1/Folds.csv'
 
 seed = 123
 step_size = 1

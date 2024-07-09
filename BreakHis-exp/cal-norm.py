@@ -12,7 +12,8 @@ N_CHANNELS = 3  # 设置输入图像的通道数为 3。
 dataset = datasets.BreaKHis('binary', 'train', magnification=None,
                             transform=transforms.ToTensor())  # 加载 BreaKHis 数据集的训练集,并将图像转换为 PyTorch 张量。
 full_loader = torch.utils.data.DataLoader(dataset, shuffle=False,
-                                          num_workers=8)  # 创建一个数据加载器 full_loader，它会在训练集上进行遍历。shuffle=False 表示不打乱数据集顺序, num_workers=8 表示使用 8 个子进程加载数据。
+                                          num_workers=0)
+# 创建一个数据加载器 full_loader，它会在训练集上进行遍历。shuffle=False 表示不打乱数据集顺序, num_workers=8 表示使用 8 个子进程加载数据。默认8 笔记本必须设为0
 
 # 初始化 3 个通道的均值和标准差张量。
 mean = torch.zeros(3)
