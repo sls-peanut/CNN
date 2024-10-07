@@ -1,5 +1,6 @@
 # IntelliJ IDEA
 .idea
+*.pth
 extract_features/tiff/
 data/
 shuai/
