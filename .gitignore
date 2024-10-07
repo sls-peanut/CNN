@@ -1,6 +1,9 @@
 # IntelliJ IDEA
 .idea
 *.pth
+# Ignore Python bytecode files
+*.pyc
+__pycache__/
 extract_features/tiff/
 data/
 shuai/
