@@ -2,3 +2,5 @@
 .idea/
 extract_features/tiff/
 data/BreaKHis_v1
+data/BreaKHis_split
+shuai/
